@@ -1,0 +1,52 @@
+fun main() {
+
+    val sehir = "İstanbul"
+    val ulke = "Türkiye"
+    val telefon = "05551234567"
+    val postaKodu = "34000"
+    val email = "example@example.com"
+    val meslek = "Mühendis"
+    val stokMiktari = 120
+    val musteriAdi = "Ahmet Yılmaz"
+    val bakiye = 3450.75
+    val dogumGunu = "1990-05-12"
+    val maas = 15000.0
+    val medeniDurum = "Evli"
+    val urunYorum = "Harika bir ürün!"
+
+    val odemeTarihi = "2025-04-20"
+    val odeme = 129.99
+    val siparisAdeti = 3
+    val arabaModeli = "Toyota Corolla"
+    val kitapAdi = "Kotlin ile Programlama"
+    val yayinlamaTarihi = "2022-09-15"
+    val indirimMiktari = 25.0
+    val odaSayisi = 2
+    val enlem = 41.0082
+    val boylam = 28.9784
+    val urunAdi = "Kablosuz Kulaklık"
+    val yemekFiyati = 45.50
+
+    val marka = "Apple"
+    val muzikAdi = "Bohemian Rhapsody"
+    val videoSuresi = "02:45"
+    val urunPuani = 4.8
+    val resimAdi = "manzara.jpg"
+    val dosyaFormati = "JPEG"
+    val renk = "Kırmızı"
+    val renkKodu = "#FF0000"
+    val telefonModeli = "iPhone 14"
+    val ekranBoyutu = 6.1
+    val agirlik = 178.0
+
+    val ulusalGun = "23 Nisan"
+    val tatilGunu = "01 Mayıs"
+    val rezervasyonTarihi = "2025-06-10"
+    val sokakAdi = "İstiklal Caddesi"
+    val otobusHatti = "34AS"
+    val kalanDakika = 12
+    val takipKodu = "TR1234567890"
+    val kuponSuresi = "30 gün"
+    val kuponKodu = "INDIRIM30"
+    val faturaAdresi = "Atatürk Mah. No:10, İstanbul"
+}
