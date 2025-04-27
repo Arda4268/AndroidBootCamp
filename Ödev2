@@ -1,0 +1,83 @@
+class Homework2 {
+
+    fun celsiusToFahrenheit(celsius: Double): Double {
+        return celsius * 1.8 + 32
+    }
+
+    fun rectanglePerimeter(length: Double, width: Double): Double {
+        return 2 * (length + width)
+    }
+
+    fun factorial(number: Int): Long {
+        var result = 1L
+        for (i in 1..number) {
+            result *= i
+        }
+        return result
+    }
+
+    fun countLetterA(word: String): Int {
+        return word.count { it == 'a' || it == 'A' }
+    }
+}
+
+fun main() {
+    val homework = Homework2()
+
+    // 1. Soru
+    val fahrenheit = homework.celsiusToFahrenheit(25.0)
+    println("25 derece Fahrenheit cinsinden: $fahrenheit")
+
+    // 2. Soru
+    val perimeter = homework.rectanglePerimeter(5.0, 10.0)
+    println("5 ve 10 kenarları olan dikdörtgenin çevresi: $perimeter")
+
+    // 3. Soru
+    val factorialResult = homework.factorial(5)
+    println("5 sayısının faktöriyeli: $factorialResult")
+
+    // 4. Soru
+    val letterCount = homework.countLetterA("Ankara")
+    println("'Ankara' kelimesinde a harfi sayısı: $letterCount")
+}
+
+
+class Homework2Part2 {
+
+    fun calculateInteriorAngles(sides: Int): Int {
+        return (sides - 2) * 180
+    }
+
+    fun calculateSalary(daysWorked: Int): Int {
+        val hoursWorked = daysWorked * 8
+        val regularHours = if (hoursWorked > 160) 160 else hoursWorked
+        val overtimeHours = if (hoursWorked > 160) hoursWorked - 160 else 0
+
+        return (regularHours * 10) + (overtimeHours * 20)
+    }
+
+    fun calculateInternetFee(quotaUsed: Int): Int {
+        return if (quotaUsed <= 50) {
+            100
+        } else {
+            val extraQuota = quotaUsed - 50
+            100 + (extraQuota * 4)
+        }
+    }
+}
+
+fun main() {
+    val homework = Homework2Part2()
+
+    // 1. İç açılar toplamı
+    val interiorAngles = homework.calculateInteriorAngles(5)
+    println("5 kenarlı bir çokgenin iç açılar toplamı: $interiorAngles derece")
+
+    // 2. Maaş hesaplama
+    val salary = homework.calculateSalary(22)
+    println("22 gün çalışan birinin maaşı: $salary ₺")
+
+    // 3. İnternet kotası ücreti hesaplama
+    val internetFee = homework.calculateInternetFee(60)
+    println("60 GB internet kullanan birinin ücreti: $internetFee ₺")
+}
