@@ -1,0 +1,119 @@
+package com.example.feed
+
+import android.graphics.Color
+import android.os.Bundle
+import android.view.Gravity
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
+// Veri modeli
+data class Tweet(val avatarResId: Int, val userName: String, val handle: String, val content: String)
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // 1) RecyclerView'i programatik olarak oluştur
+        val recyclerView = RecyclerView(this).apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = TweetAdapter(sampleTweets())
+            setBackgroundColor(Color.WHITE)
+        }
+
+        // 2) Activity içeriği olarak RecyclerView'i ata
+        setContentView(recyclerView)
+    }
+
+    // Örnek veri
+    private fun sampleTweets() = listOf(
+        Tweet(android.R.drawable.sym_def_app_icon, "Ahmet Yılmaz", "@ahmety", "Merhaba, bugün Kotlin harika işliyor!"),
+        Tweet(android.R.drawable.sym_def_app_icon, "Ece Demir", "@eced", "RecyclerView ile tek sayfalık örnek oluşturdum 😊"),
+        Tweet(android.R.drawable.sym_def_app_icon, "Mehmet Can", "@mehmetc", "Android UI tasarımına devam!"),
+        // ... istediğiniz kadar veri ekleyebilirsiniz
+    )
+
+    // Adapter
+    inner class TweetAdapter(private val items: List<Tweet>) :
+        RecyclerView.Adapter<TweetAdapter.TweetViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TweetViewHolder {
+            // Her satır için yatay LinearLayout
+            val container = LinearLayout(parent.context).apply {
+                orientation = LinearLayout.HORIZONTAL
+                setPadding(24, 24, 24, 24)
+                layoutParams = RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            }
+            // Avatar
+            val avatar = ImageView(parent.context).apply {
+                layoutParams = LinearLayout.LayoutParams(100, 100)
+            }
+            // Sağ taraf: dikey bilgi bloğu
+            val textContainer = LinearLayout(parent.context).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(16, 0, 0, 0)
+                layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+            }
+            // Kullanıcı ismi
+            val userNameTv = TextView(parent.context).apply {
+                textSize = 16f
+                setTextColor(Color.BLACK)
+                setTypeface(typeface, android.graphics.Typeface.BOLD)
+            }
+            // @handle
+            val handleTv = TextView(parent.context).apply {
+                textSize = 14f
+                setTextColor(Color.DKGRAY)
+            }
+            // İçerik
+            val contentTv = TextView(parent.context).apply {
+                textSize = 15f
+                setTextColor(Color.DKGRAY)
+                setPadding(0, 8, 0, 0)
+            }
+
+            textContainer.addView(userNameTv)
+            textContainer.addView(handleTv)
+            textContainer.addView(contentTv)
+            container.addView(avatar)
+            container.addView(textContainer)
+
+            return TweetViewHolder(container, avatar, userNameTv, handleTv, contentTv)
+        }
+
+        override fun onBindViewHolder(holder: TweetViewHolder, position: Int) {
+            holder.bind(items[position])
+        }
+
+        override fun getItemCount() = items.size
+
+        // ViewHolder
+        inner class TweetViewHolder(
+            view: LinearLayout,
+            private val avatar: ImageView,
+            private val userNameTv: TextView,
+            private val handleTv: TextView,
+            private val contentTv: TextView
+        ) : RecyclerView.ViewHolder(view) {
+
+            fun bind(tweet: Tweet) {
+                avatar.setImageResource(tweet.avatarResId)
+                userNameTv.text = tweet.userName
+                handleTv.text = tweet.handle
+                contentTv.text = tweet.content
+            }
+        }
+    }
+}
